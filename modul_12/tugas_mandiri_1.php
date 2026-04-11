@@ -2,7 +2,7 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <title>Soal 1 - Bilangan Bulat Positif</title>
+    <title>Bilangan Bulat Positif</title>
     <style>
       body {
         font-family: Arial, sans-serif;
