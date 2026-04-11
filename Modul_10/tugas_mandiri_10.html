@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tugas Mandiri Modul 10</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 50px auto;
+        padding: 20px;
+        max-width: 600px;
+      }
+
+      h2 {
+        text-align: center;
+        color: #222;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 400px;
+        margin: auto;
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      input[type="submit"],
+      input[type="reset"],
+      button[type="submit"],
+      button[type="reset"] {
+        width: 100%;
+        padding: 6px 18px 4.6px;
+        color: #fff;
+        background: #10b981;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      input[type="submit"]:hover,
+      input[type="reset"]:hover,
+      button[type="submit"]:hover,
+      button[type="reset"]:hover {
+        background: #059669;
+      }
+
+      .result-card {
+        display: none;
+        max-width: 400px;
+        margin: 20px auto 0;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        padding: 16px;
+      }
+
+      .result-card.show {
+        display: block;
+      }
+
+      .result-card h3 {
+        margin: 0 0 12px;
+        font-size: 14px;
+        color: #222;
+        border-bottom: 1px solid #e5e7eb;
+        padding-bottom: 8px;
+      }
+
+      .result-row {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-bottom: 8px;
+      }
+
+      .result-row:last-child {
+        margin-bottom: 0;
+      }
+
+      .result-row label {
+        font-size: 12px;
+        color: #6b7280;
+      }
+
+      .result-row span {
+        font-size: 14px;
+        color: #222;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Form Pendaftaran Perpustakaan</h2>
+    <form id="myForm" onsubmit="return false;">
+      <div>
+        <label>Nama Lengkap</label>
+        <input type="text" id="nama" />
+      </div>
+      <div>
+        <label>NIS / NISN</label>
+        <input type="text" id="nis" />
+      </div>
+      <div>
+        <label>Jurusan</label>
+        <select id="jurusan">
+          <option value="Teknik Grafika">Teknik Grafika</option>
+          <option value="Teknik Logistik">Teknik Logistik</option>
+          <option value="Teknik Mekatronika">Teknik Mekatronika</option>
+          <option value="Teknik Komputer dan Jaringan">
+            Teknik Komputer dan Jaringan
+          </option>
+          <option value="Rekayasa Perangkat Lunak" selected>
+            Rekayasa Perangkat Lunak
+          </option>
+          <option value="Desain Komunikasi Visual">
+            Desain Komunikasi Visual
+          </option>
+          <option value="Animasi">Animasi</option>
+          <option value="Perhotelan">Perhotelan</option>
+        </select>
+      </div>
+      <div>
+        <label>Kelas</label>
+        <select id="kelas">
+          <option value="X" selected>X</option>
+          <option value="XI">XI</option>
+          <option value="XII">XII</option>
+        </select>
+      </div>
+      <div>
+        <label>Jenis Kelamin</label>
+        <label>Laki-Laki <input type="radio" name="gender" value="Laki-Laki" /></label>
+        <label>Perempuan <input type="radio" name="gender" value="Perempuan" /></label>
+      </div>
+      <div>
+        <label>Tempat Lahir</label>
+        <input type="text" id="tempatLahir" />
+      </div>
+      <div>
+        <label>Tanggal Lahir</label>
+        <input type="date" id="tanggalLahir" />
+      </div>
+      <div>
+        <label>Alamat</label>
+        <input type="text" id="alamat" />
+      </div>
+      <div>
+        <label>No. HP</label>
+        <input type="text" id="noHp" />
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="email" id="email" />
+      </div>
+      <button type="submit" onclick="daftar()">Daftar</button>
+      <button type="reset" onclick="kosongkan()">Kosongkan</button>
+    </form>
+
+    <div class="result-card" id="resultCard">
+      <h3>Hasil Pendaftaran</h3>
+      <div class="result-row">
+        <label>Nama Lengkap</label>
+        <span id="rNama"></span>
+      </div>
+      <div class="result-row">
+        <label>NIS / NISN</label>
+        <span id="rNis"></span>
+      </div>
+      <div class="result-row">
+        <label>Jurusan</label>
+        <span id="rJurusan"></span>
+      </div>
+      <div class="result-row">
+        <label>Kelas</label>
+        <span id="rKelas"></span>
+      </div>
+      <div class="result-row">
+        <label>Jenis Kelamin</label>
+        <span id="rGender"></span>
+      </div>
+      <div class="result-row">
+        <label>Tempat, Tgl Lahir</label>
+        <span id="rTtl"></span>
+      </div>
+      <div class="result-row">
+        <label>Alamat</label>
+        <span id="rAlamat"></span>
+      </div>
+      <div class="result-row">
+        <label>No. HP</label>
+        <span id="rHp"></span>
+      </div>
+      <div class="result-row">
+        <label>Email</label>
+        <span id="rEmail"></span>
+      </div>
+    </div>
+
+  </body>
+  <script>
+    function getVal(id) {
+      var el = document.getElementById(id);
+      return el ? el.value.trim() : "";
+    }
+
+    function getRadio(name) {
+      var radios = document.querySelectorAll('input[name="' + name + '"]');
+      for (var i = 0; i < radios.length; i++) {
+        if (radios[i].checked) return radios[i].value;
+      }
+      return "";
+    }
+
+    function formatDate(d) {
+      if (!d) return "-";
+      var parts = d.split("-");
+      if (parts.length !== 3) return d;
+      var months = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+      return parseInt(parts[2]) + " " + months[parseInt(parts[1]) - 1] + " " + parts[0];
+    }
+
+    function initials(name) {
+      if (!name) return "?";
+      var parts = name.trim().split(" ").filter(Boolean);
+      if (parts.length === 1) return parts[0][0].toUpperCase();
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+
+    function daftar() {
+      var nama         = getVal("nama");
+      var nis          = getVal("nis");
+      var jurusan      = getVal("jurusan");
+      var kelas        = getVal("kelas");
+      var gender       = getRadio("gender");
+      var tempatLahir  = getVal("tempatLahir");
+      var tanggalLahir = getVal("tanggalLahir");
+      var alamat       = getVal("alamat");
+      var noHp         = getVal("noHp");
+      var email        = getVal("email");
+
+      if (!nama || !nis) {
+        alert("Nama Lengkap dan NIS/NISN wajib diisi!");
+        return;
+      }
+
+      document.getElementById("rNama").textContent    = nama;
+      document.getElementById("rNis").textContent     = nis;
+      document.getElementById("rJurusan").textContent = jurusan || "-";
+      document.getElementById("rKelas").textContent   = "Kelas " + kelas;
+      document.getElementById("rGender").textContent  = gender || "-";
+      document.getElementById("rTtl").textContent     = (tempatLahir ? tempatLahir + ", " : "") + formatDate(tanggalLahir);
+      document.getElementById("rAlamat").textContent  = alamat || "-";
+      document.getElementById("rHp").textContent      = noHp || "-";
+      document.getElementById("rEmail").textContent   = email || "-";
+
+      var card = document.getElementById("resultCard");
+      card.classList.add("show");
+      card.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function kosongkan() {
+      ["nama", "nis", "tempatLahir", "tanggalLahir", "alamat", "noHp", "email"].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.value = "";
+      });
+
+      document.getElementById("jurusan").value = "Rekayasa Perangkat Lunak";
+      document.getElementById("kelas").value   = "X";
+
+      document.querySelectorAll('input[name="gender"]').forEach(function (r) {
+        r.checked = false;
+      });
+
+      document.getElementById("resultCard").classList.remove("show");
+    }
+  </script>
+</html>

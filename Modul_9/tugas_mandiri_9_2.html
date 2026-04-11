@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas Mandiri 9.2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+        }
+
+        h2 {
+            color: #555;
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Data Nama Siswa RPL</h1>
+    <h2>SMK Negeri 4 Malang</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>NIS</th>
+                <th>Nama Siswa</th>
+                <th>Kelas</th>
+            </tr>
+        </thead>
+        <tbody id="tabelSiswa"></tbody>
+    </table>
+
+    <script>
+        const dataSiswa = [
+            { no: 1, nis: 1001, nama: "Andi", kelas: "X RPL A" },
+            { no: 2, nis: 1002, nama: "Budi", kelas: "X RPL B" },
+            { no: 3, nis: 1003, nama: "Citra", kelas: "X RPL C" },
+            { no: 4, nis: 1004, nama: "Dewi", kelas: "XI RPL A" }
+        ];
+
+        dataSiswa.forEach(function (siswa) {
+            document.getElementById('tabelSiswa').innerHTML += `
+                <tr>
+                    <td>${siswa.no}</td>
+                    <td>${siswa.nis}</td>
+                    <td>${siswa.nama}</td>
+                    <td>${siswa.kelas}</td>
+                </tr>
+            `;
+        });
+    </script>
+</body>
+
+</html>

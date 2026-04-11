@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <title>Tugas Mandiri Modul 8</title>
+  <style>
+    main {
+      font-family: "inter", sans-serif;
+      box-sizing: border-box;
+      background: #fff;
+      padding: 0;
+      margin: auto;
+      transform: translateY(50%);
+      color: #222;
+      max-width: 600px;
+    }
+
+    .table-title {
+      text-align: center;
+      font-size: 24px;
+    }
+
+    .table-container {
+      background: #fff;
+      overflow: hidden;
+      border: 1px solid #222;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    tr {
+      border-bottom: 1px solid #222;
+    }
+
+    tr:last-of-type {
+      border: none;
+    }
+
+    .table-button {
+      display: flex;
+      gap: 4px;
+      justify-content: flex-start;
+    }
+
+    td {
+      padding: 4px;
+      font-size: 14px;
+    }
+
+    input {
+      width: 98.1%;
+    }
+
+    .table-button input {
+      width: fit-content;
+      padding: 6px 18px 4.6px;
+      color: #fff;
+      background: #10B981;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .table-button input:hover {
+      background: #059669;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: center;
+      width: fit-content
+    }
+
+    .table-label {
+      border-right: 1px solid #222;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="form-content">
+    <h1 class="table-title">Travel Grafika</h1>
+    <div class="table-container">
+      <table>
+        <tr>
+          <td class="table-label">Nama: </td>
+          <td><input type="text" id="nameInput"></td>
+        </tr>
+        <tr>
+          <td class="table-label">Tujuan: </td>
+          <td>
+            <select name="city" id="destinationInput">
+              <option value="Malang" selected>Malang</option>
+              <option value="Surabaya">Surabaya</option>
+              <option value="Trenggalek">Trenggalek</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="table-label">Kelas: </td>
+          <td>
+            <select name="city" id="classInput">
+              <option value="Economy" selected>Ekonomi</option>
+              <option value="Business">Bisnis</option>
+              <option value="Exclusive">Eksklusif</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="table-label">Jumlah Tiket: </td>
+          <td><input type="number" id="ticketInput" min="1"></td>
+        </tr>
+        <tr>
+          <td class="table-label">Member: </td>
+          <td class="checkbox"><input type="checkbox" id="memberInput">Ya</td>
+        </tr>
+        <tr>
+          <td class="table-label">Harga Tiket: </td>
+          <td><input type="text" id="costOutput" readonly></td>
+        </tr>
+        <tr>
+          <td class="table-label">Sub Total: </td>
+          <td><input type="text" id="subtotalOutput" readonly></td>
+        </tr>
+        <tr>
+          <td class="table-label">Diskon: </td>
+          <td><input type="text" id="discountOutput" readonly></td>
+        </tr>
+        <tr>
+          <td class="table-label">Total Bayar: </td>
+          <td><input type="text" id="paymentOutput" readonly></td>
+        </tr>
+
+        <tr>
+          <td class="table-label"></td>
+          <td>
+            <div class="table-button">
+              <input type="button" value="Hitung" onclick="count()">
+              <input type="reset" value="Ulang" onclick="resetForm()">
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </main>
+
+  <script>
+    function count() {
+      const name = document.getElementById("nameInput").value;
+      const destination = document.getElementById("destinationInput").value;
+      const travelClass = document.getElementById("classInput").value;
+      const totalTicket = parseInt(document.getElementById("ticketInput").value) || 0;
+      const isMember = document.getElementById("memberInput").checked;
+
+      if (name === "") {
+        alert("Nama harus diisi!");
+        return;
+      }
+
+      if (totalTicket <= 0) {
+        alert("Jumlah tiket harus lebih dari 0!");
+        return;
+      }
+
+      let cost = 0;
+
+      switch (destination) {
+        case "Malang":
+          if (travelClass === "Economy") {
+            cost = 50000;
+          } else if (travelClass === "Business") {
+            cost = 75000;
+          } else {
+            cost = 100000;
+          }
+          break;
+
+        case "Surabaya":
+          if (travelClass === "Economy") {
+            cost = 100000;
+          } else if (travelClass === "Business") {
+            cost = 125000;
+          } else {
+            cost = 150000;
+          }
+          break;
+
+        case "Trenggalek":
+          if (travelClass === "Economy") {
+            cost = 60000;
+          } else if (travelClass === "Business") {
+            cost = 85000;
+          } else {
+            cost = 110000;
+          }
+          break;
+
+        default:
+          cost = 50000;
+      }
+
+      const subTotal = cost * totalTicket;
+
+      let discount = 0;
+      if (isMember) {
+        discount = subTotal * 0.1;
+        alert("Anda mendapatkan 10% diskon sebagai member!");
+      } else {
+        discount = 0;
+        alert("Daftar menjadi member untuk mendapatkan diskon 10%!");
+      }
+
+      const total = subTotal - discount;
+
+      document.getElementById("costOutput").value = cost;
+      document.getElementById("subtotalOutput").value = subTotal;
+      document.getElementById("discountOutput").value = discount;
+      document.getElementById("paymentOutput").value = total;
+
+      alert(
+        "Perhitungan Berhasil!\n\n" +
+        "Nama: " + name + "\n" +
+        "Tujuan: " + destination + "\n" +
+        "Kelas: " + travelClass + "\n" +
+        "Jumlah Tiket: " + totalTicket + "\n" +
+        "Harga Tiket: Rp " + cost.toLocaleString("id-ID") + "\n" +
+        "Sub Total: Rp " + subTotal.toLocaleString("id-ID") + "\n" +
+        "Diskon: Rp " + discount.toLocaleString("id-ID") + "\n" +
+        "Total Bayar: Rp " + total.toLocaleString("id-ID")
+      );
+    }
+
+    function resetForm() {
+      document.getElementById("nameInput").value = "";
+      document.getElementById("destinationInput").value = "Malang";
+      document.getElementById("classInput").value = "Economy";
+      document.getElementById("ticketInput").value = "";
+      document.getElementById("memberInput").checked = false;
+      document.getElementById("costOutput").value = "";
+      document.getElementById("subtotalOutput").value = "";
+      document.getElementById("discountOutput").value = "";
+      document.getElementById("paymentOutput").value = "";
+    }
+  </script>
+</body>
+
+</html>

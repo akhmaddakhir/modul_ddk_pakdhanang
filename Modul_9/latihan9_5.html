@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan 9.5</title>
+</head>
+
+<body>
+    <h3>Daftar Buah: </h3>
+    <ul id="daftar"></ul>
+    <script>
+        let buah = ["Apel", "Jeruk", "Mangga", "Pisang"];
+        let list = document.getElementById("daftar")
+
+        let no = 1;
+        for (let i = 0; i < buah.length; i++) {
+            list.innerHTML += no++ + ". " + buah[1] + "<br>";
+        }
+    </script>
+</body>
+
+</html>
