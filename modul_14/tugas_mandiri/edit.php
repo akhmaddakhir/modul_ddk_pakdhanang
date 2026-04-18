@@ -41,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 		exit;
 	} else {
 		$error = "Gagal update: " . mysqli_error($conn);
-		// Update $data dengan POST values untuk menampilkan kembali data yang user input
 		$data = [
 			"nis" => $_POST["nis"] ?? "",
 			"nama" => $_POST["nama"] ?? "",
@@ -141,7 +140,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 		.form-box {
 			background: #fff;
 			border: 1px solid #ccc;
-			border-top: 4px solid #10b981;
 			border-radius: 6px;
 			padding: 20px 24px;
 		}
