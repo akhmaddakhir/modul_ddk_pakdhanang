@@ -3,6 +3,7 @@ session_start();
 
 $namauser = $_POST ['username'];
 $password = $_POST ['password'];
+
 if ('login sukses' )
 {
 $_SESSION ['namauser'] = $namauser;
