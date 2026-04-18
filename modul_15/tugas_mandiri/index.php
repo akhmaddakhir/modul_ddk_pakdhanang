@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true) {
+  header("Location: login.php");
+  exit;
+}
+?>
 <!doctype html>
 <html lang="id">
 
@@ -20,6 +27,16 @@
     .wrap {
       max-width: 980px;
       margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: #6b7280;
     }
 
     .page-header {
@@ -80,6 +97,15 @@
 
     .button-secondary:hover {
       background: #d1d5db;
+    }
+
+    .button-logout {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    .button-logout:hover {
+      background: #dc2626;
     }
 
     .alert {
@@ -166,6 +192,11 @@
 
 <body>
   <div class="wrap">
+    <div class="topbar">
+      <span>Halo, <strong><?= htmlspecialchars($_SESSION["username"]) ?></strong></span>
+      <a href="logout.php" class="button button-logout">Logout</a>
+    </div>
+
     <div class="page-header">
       <h2>Data Pendaftaran Ekstrakurikuler</h2>
       <a href="tambah.php" class="button button-primary">+ Tambah Siswa</a>
